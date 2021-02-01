@@ -1,0 +1,23 @@
+{
+  "name": "resourcesrelationnellesapi",
+  "version": "1.0.0",
+  "description": "Web services du projet ReSources Relationnelles",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Charlinehe/ReSourcesRelationnellesApi.git"
+  },
+  "author": "Les semis croustillants",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Charlinehe/ReSourcesRelationnellesApi/issues"
+  },
+  "homepage": "https://github.com/Charlinehe/ReSourcesRelationnellesApi#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  }
+}
