@@ -1,19 +1,14 @@
 const express = require('express')
 const app = express()
-const mysql = require('mysql');
-const connexion = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    database: "ressourcesrelationnelles"
-});
+const config = require('./configuration/config')
 
-app.listen(3005, () => {
+app.listen(config.port, () => {
     console.log('Serveur à l\'écoute')
 })
 
   app.get('/users', (req, res) => {
-    connexion.connect(function(error) {
-        connexion.query("SELECT * FROM user LIMIT 10",
+    config.connexion.connect(function(error) {
+        config.connexion.query("SELECT * FROM user LIMIT 10",
         function(error, result) {
             res.send(result)
         })
