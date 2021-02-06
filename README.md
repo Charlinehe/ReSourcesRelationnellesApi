@@ -10,6 +10,9 @@ Exécuter la commande suivante :
 Exécuter les commandes suivantes :  
 >npm install express  
 >npm install mysql
+>npm install jsonwebtoken --save
+>npm install bcrypt --save
+>npm install body-parser --save
 
 ## Lancer le projet
 Exécuter la commande suivante :  
