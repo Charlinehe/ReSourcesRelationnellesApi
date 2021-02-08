@@ -18,12 +18,12 @@ module.exports = {
     checkToken: (token) => {
 
         if (!token) {
-            return '{ "error": "Accès non autorisé - token attendu" }'
+            return JSON.parse('{ "error": "Accès non autorisé - token attendu" }')
         }
 
         return jwt.verify(token, JWT_SECRET, (err, decodedToken) => {
             if (err) {
-                return '{ "error": "Accès non autorisé - token invalide" }'
+                return JSON.parse('{ "error": "Accès non autorisé - token invalide" }')
             } else {
                 return parseJwt(token)
             }
