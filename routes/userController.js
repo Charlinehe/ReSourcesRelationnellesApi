@@ -19,16 +19,40 @@ module.exports = {
         }
 
         config.connexion.connect((error) => {
-            config.connexion.query("SELECT password FROM user WHERE username = " + mysql.escape(username),
-            function(error, result) {
+
+            sql = `SELECT u.id as userId, u.firstname as firstname, u.lastname as lastname, u.email as email, 
+                u.password as password, u.active as active, d.label as department, d.number as departmentNumber, 
+                u.role_id as roleId FROM user u 
+                INNER JOIN department d ON u.department_id = d.id 
+                WHERE username = ` + mysql.escape(username) 
+
+            config.connexion.query(sql, (error, result) => {
+                let dbUserId = -1
+                let dbFirstName = ""
+                let dbLastName = ""
+                let dbEmail = ""
                 let dbPassword = ""
+                let dbActive = -1
+                let dbDepartment = ""
+                let dbDepartmentNumber = ""
+                let dbRoleId = -1
 
-                Object.keys(result).forEach((key) => {
-                    dbPassword = result[key].password
-                })
+                if(result[0] === undefined) {
+                    return res.status(404).json({"error": "Le login <" + username + "> n'est pas attribué"})
+                }
 
-                if (dbPassword == "") {
-                    return res.status(404).json({"error": "Le login " + username + " n'est pas attribué"})
+                dbUserId = result[0].userId
+                dbFirstName = result[0].dbFirstName
+                dbLastName = result[0].dbLastName
+                dbEmail = result[0].email
+                dbPassword = result[0].password
+                dbActive = result[0].active
+                dbDepartment = result[0].department
+                dbDepartmentNumber = result[0].departmentNumber
+                dbRoleId = result[0].roleId
+
+                if (dbActive != 1) {
+                    return res.status(403).json({"error": "Le compte <" + username + "> a été désactivé"})
                 }
 
                 /* TEST VERIF MOT DE PASSE
@@ -61,8 +85,15 @@ module.exports = {
                 }*/
 
                 return res.status(200).json({
+                    "userId": dbUserId,
+                    "firstName": dbFirstName,
+                    "lastName": dbLastName,
                     "username": username,
-                    "token": jwtUtils.generateTokenForUser(username)
+                    "email": dbEmail,
+                    "department": dbDepartment,
+                    "departmentNumber": dbDepartmentNumber,
+                    "roleId": dbRoleId,
+                    "access_token": jwtUtils.generateTokenForUser(result[0])
                 })
 
             })
