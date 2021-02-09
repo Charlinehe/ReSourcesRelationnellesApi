@@ -4,7 +4,7 @@ const config = require('./configuration/config')
 const router = require('./router').router
 
 app.listen(config.port, () => {
-    console.log('Serveur à l\'écoute')
+    console.log('Server running on port ' + config.port)
 })
 
 app.use('/api/', router)
