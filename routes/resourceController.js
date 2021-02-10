@@ -4,7 +4,20 @@ const jwtUtils = require('../utils/jwt.utils')
 module.exports = {
 
     getPublicResources: (req, res) => {
-        config.connexion.connect(function (error) {
+        let limit = req.headers['limit']
+        let page = req.headers['page']
+
+        if (limit === 'undefined') {
+            limit = 100
+        }
+
+        if (page === 'undefined') {
+            page = 1
+        }
+
+        let firstRecord = (page - 1) * limit
+
+        config.connexion.connect((error) => {
             sql = `SELECT r.id, r.title, r.description, r.link, r.date_creation, r.image_name, r.content_name, 
             ac.label as age_category, u.username, rst.label as relationship_type, rt.label as resource_type, 
             c.label as category 
@@ -14,7 +27,10 @@ module.exports = {
             INNER JOIN relationship_type rst ON r.relation_ship_type_id = rst.id 
             INNER JOIN resource_type rt ON r.resource_type_id = rt.id 
             INNER JOIN category c ON r.category_id = c.id 
-            WHERE r.public = 1 AND r.active = 1 ORDER BY r.date_creation DESC;`
+            WHERE r.public = 1 AND r.active = 1
+            ORDER BY r.date_creation DESC
+            LIMIT ` + firstRecord + `, ` + limit + `;`
+            console.log(sql)
             config.connexion.query(
                 sql,
                 (error, result) => {
