@@ -1,5 +1,6 @@
 const config = require('../configuration/config')
 const jwtUtils = require('../utils/jwt.utils')
+const log = require('../utils/log').log
 
 module.exports = {
 
@@ -32,7 +33,7 @@ module.exports = {
             config.connexion.query(
                 sql,
                 (error, result) => {
-                    Log(req, error)
+                    log(req, error)
                     return res.status(200).json(result)
                 }
             )
@@ -53,7 +54,7 @@ module.exports = {
                 WHERE r.active = 1 AND r.id = ` + req.params.resource_id
             config.connexion.query(sql,
                 (error, result) => {
-                    Log(req, error)
+                    log(req, error)
                     if(error) throw error;
                     if (result[0] != undefined) {
 
@@ -117,20 +118,3 @@ module.exports = {
     },
 
 }
-
-function Log(request, error) {
-    const { rawHeaders, httpVersion, method, socket, url } = request;
-    const { remoteAddress, remoteFamily } = socket;
-    let date = new Date;
-
-    console.log(
-        Date.now(),
-        rawHeaders[1],
-        httpVersion,
-        method,
-        remoteAddress,
-        remoteFamily,
-        url,
-        (error) ? (error.errno, error.code, error.sqlMessage) : 200,
-    );
-};

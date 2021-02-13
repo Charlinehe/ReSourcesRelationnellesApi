@@ -8,9 +8,10 @@ const iv = crypto.randomBytes(16)
 */
 const jwtUtils = require('../utils/jwt.utils')
 const mysql = require('mysql')
+const log = require('../utils/log').log
 
 module.exports = {
-    login: function(req, res) {
+    login: (req, res) => {
         let username = req.body.username
         let password = req.body.password
 
@@ -19,6 +20,8 @@ module.exports = {
         }
 
         config.connexion.connect((error) => {
+
+            log(req, error)
 
             sql = `SELECT u.id as userId, u.firstname as firstname, u.lastname as lastname, u.email as email, 
                 u.password as password, u.active as active, d.label as department, d.number as departmentNumber, 
