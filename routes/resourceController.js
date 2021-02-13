@@ -30,6 +30,7 @@ module.exports = {
 function Log(request, error) {
     const { rawHeaders, httpVersion, method, socket, url } = request;
     const { remoteAddress, remoteFamily } = socket;
+    let date = new Date;
 
     console.log(
         Date.now(),
