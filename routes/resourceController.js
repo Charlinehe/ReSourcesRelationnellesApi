@@ -7,14 +7,13 @@ module.exports = {
         let limit = req.headers['limit']
         let page = req.headers['page']
 
-        if (limit === 'undefined') {
+        if (limit === undefined) {
             limit = 100
         }
 
-        if (page === 'undefined') {
+        if (page === undefined) {
             page = 1
         }
-
         let firstRecord = (page - 1) * limit
 
         config.connexion.connect((error) => {
@@ -34,6 +33,7 @@ module.exports = {
             config.connexion.query(
                 sql,
                 (error, result) => {
+                    console.log(sql, error, result);
                     return res.status(200).json(result)
                 }
             )
@@ -52,7 +52,7 @@ module.exports = {
                 INNER JOIN resource_type rt ON r.resource_type_id = rt.id 
                 INNER JOIN category c ON r.category_id = c.id 
                 WHERE r.active = 1 AND r.id = ` + req.params.resource_id
-            config.connexion.query(sql, 
+            config.connexion.query(sql,
                 (error, result) => {
                     if (result[0] != undefined) {
 
@@ -64,12 +64,12 @@ module.exports = {
 
                                 sql = `SELECT role_id as roleId FROM user WHERE id = ` + decodedToken.userId
 
-                                config.connexion.query(sql, 
+                                config.connexion.query(sql,
                                     (error2, result2) => {
 
                                         if (result2[0] != undefined) {
 
-                                            if (result2[0].roleId != 1) { 
+                                            if (result2[0].roleId != 1) {
                                                 return res.status(200).json(result)
                                             } else {
                                                 sql = `SELECT id FROM rel_user_action_resource 
@@ -79,11 +79,11 @@ module.exports = {
                                                 UNION 
                                                 SELECT id FROM rel_shared_resource_user 
                                                 WHERE shared_with_user_id = ` + decodedToken.userId + ` 
-                                                AND resource_id = ` + req.params.resource_id 
-                                                config.connexion.query(sql, 
+                                                AND resource_id = ` + req.params.resource_id
+                                                config.connexion.query(sql,
                                                     (error3, result3) => {
-                                                        if(result3[0] === undefined) {
-                                                            return res.status(403).json({"message": "Accès non autorisé - Ressource privée"})
+                                                        if (result3[0] === undefined) {
+                                                            return res.status(403).json({ "message": "Accès non autorisé - Ressource privée" })
                                                         } else {
                                                             //l'utilisateur est auteur de la ressource ou la ressource a été partagée avec lui
                                                             return res.status(200).json(result)
@@ -91,12 +91,12 @@ module.exports = {
                                                     }
                                                 )
                                             }
-                                            
+
                                         } else {
-                                            return res.status(500).json({"message": "Erreur fatale"})
+                                            return res.status(500).json({ "message": "Erreur fatale" })
                                         }
                                     }
-                                    
+
                                 )
 
                             } else {
@@ -107,9 +107,9 @@ module.exports = {
                         }
 
                     } else {
-                        return res.status(404).json({"message": "Ressource non trouvée - La ressource est inexistante ou inactive"})
+                        return res.status(404).json({ "message": "Ressource non trouvée - La ressource est inexistante ou inactive" })
                     }
-                    
+
                 }
             )
         })
