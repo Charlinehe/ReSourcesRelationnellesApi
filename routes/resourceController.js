@@ -29,7 +29,6 @@ module.exports = {
             WHERE r.public = 1 AND r.active = 1
             ORDER BY r.date_creation DESC
             LIMIT ` + firstRecord + `, ` + limit + `;`
-            console.log(sql)
             config.connexion.query(
                 sql,
                 (error, result) => {
@@ -40,7 +39,7 @@ module.exports = {
         })
     },
 
-    getDetailPublicResource: (req, res) => {
+    getDetailResource: (req, res) => {
         config.connexion.connect( (errorCon) => {
             sql = `SELECT r.id, r.title, r.description, r.link, r.date_creation, r.image_name, r.content_name,  
                 ac.label as age_category, u.username, rst.label as relationship_type, rt.label as resource_type,  

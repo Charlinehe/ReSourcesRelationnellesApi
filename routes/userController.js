@@ -55,35 +55,6 @@ module.exports = {
                     return res.status(403).json({"error": "Le compte <" + username + "> a été désactivé"})
                 }
 
-                /* TEST VERIF MOT DE PASSE
-                bcrypt.compare(password, dbPassword, (errBycrypt, resBycrypt) => {
-                    if (resBycrypt) {
-                        return res.status(200).json({
-                            "username": username,
-                            "token": "token"
-                        })
-                    } else {
-                        return res.status(403).json({"error": "Mot de passe invalide"})
-                    }
-                })
-
-                let iv = Buffer.from(dbPassword, 'hex')
-                let encryptedText = Buffer.from(dbPassword, 'hex')
-                let decipher = crypto.createDecipheriv("sha512", Buffer.from(key), iv)
-                let decrypted = decipher.update(encryptedText)
-                decrypted = Buffer.concat([decrypted, decipher.final()])
-
-                if (password == decrypted) {
-                    return res.status(200).json({
-                        "username": username,
-                        "token": "token"
-                    })
-                } else {
-                    return res.status(403).json({
-                        "error": "Mot de passe invalide"
-                    })
-                }*/
-
                 return res.status(200).json({
                     "userId": dbUserId,
                     "firstName": dbFirstName,

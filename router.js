@@ -6,7 +6,7 @@ exports.router = (() => {
     const router = express.Router()
 
     router.route('/resource/public').get(resourceController.getPublicResources)
-    router.route('/resource/:resource_id').get(resourceController.getDetailPublicResource)
+    router.route('/resource/:resource_id').get(resourceController.getDetailResource)
 
     router.route('/user/login').post(userController.login)
 
