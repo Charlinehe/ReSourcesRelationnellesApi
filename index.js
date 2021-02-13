@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true}))
 app.use(bodyParser.json())
 
 app.listen(config.port, () => {
-    console.log('Serveur à l\'écoute')
+    console.log('Server running on port ' + config.port)
 })
 
 app.use('/api/', router)

@@ -33,7 +33,7 @@ module.exports = {
             config.connexion.query(
                 sql,
                 (error, result) => {
-                    console.log(sql, error, result);
+                    Log(req, error)
                     return res.status(200).json(result)
                 }
             )
@@ -41,7 +41,7 @@ module.exports = {
     },
 
     getDetailPublicResource: (req, res) => {
-        config.connexion.connect(function (error) {
+        config.connexion.connect( (errorCon) => {
             sql = `SELECT r.id, r.title, r.description, r.link, r.date_creation, r.image_name, r.content_name,  
                 ac.label as age_category, u.username, rst.label as relationship_type, rt.label as resource_type,  
                 c.label as category, r.public as public 
@@ -54,6 +54,8 @@ module.exports = {
                 WHERE r.active = 1 AND r.id = ` + req.params.resource_id
             config.connexion.query(sql,
                 (error, result) => {
+                    Log(req, error)
+                    if(error) throw error;
                     if (result[0] != undefined) {
 
                         if (result[0].public != 1) {
@@ -116,3 +118,20 @@ module.exports = {
     },
 
 }
+
+function Log(request, error) {
+    const { rawHeaders, httpVersion, method, socket, url } = request;
+    const { remoteAddress, remoteFamily } = socket;
+    let date = new Date;
+
+    console.log(
+        Date.now(),
+        rawHeaders[1],
+        httpVersion,
+        method,
+        remoteAddress,
+        remoteFamily,
+        url,
+        (error) ? (error.errno, error.code, error.sqlMessage) : 200,
+    );
+};
