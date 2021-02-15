@@ -7,6 +7,9 @@ module.exports = {
     getPublicResources: (req, res) => {
         let limit = req.headers['limit']
         let page = req.headers['page']
+        let search = req.headers['search']
+
+        search = search ? search.split(" ") : []
 
         if (limit === undefined) {
             limit = 100
@@ -27,8 +30,15 @@ module.exports = {
             INNER JOIN relationship_type rst ON r.relation_ship_type_id = rst.id 
             INNER JOIN resource_type rt ON r.resource_type_id = rt.id 
             INNER JOIN category c ON r.category_id = c.id 
-            WHERE r.public = 1 AND r.active = 1
-            ORDER BY r.date_creation DESC
+            WHERE r.public = 1 AND r.active = 1 `
+            search.forEach(element => {
+                sql += `AND (r.title LIKE "%` + element + `%" 
+                OR ac.label LIKE "%` + element + `%" 
+                OR rst.label LIKE "%` + element + `%" 
+                OR rt.label LIKE "%` + element + `%" 
+                OR c.label LIKE "%` + element + `%")`
+            });
+            sql += ` ORDER BY r.date_creation DESC 
             LIMIT ` + firstRecord + `, ` + limit + `;`
             config.connexion.query(
                 sql,
@@ -41,7 +51,7 @@ module.exports = {
     },
 
     getDetailResource: (req, res) => {
-        config.connexion.connect( (errorCon) => {
+        config.connexion.connect((errorCon) => {
             sql = `SELECT r.id, r.title, r.description, r.link, r.date_creation, r.image_name, r.content_name,  
                 ac.label as age_category, u.username, rst.label as relationship_type, rt.label as resource_type,  
                 c.label as category, r.public as public 
@@ -55,7 +65,7 @@ module.exports = {
             config.connexion.query(sql,
                 (error, result) => {
                     log(req, error)
-                    if(error) throw error;
+                    if (error) throw error;
                     if (result[0] != undefined) {
 
                         if (result[0].public != 1) {

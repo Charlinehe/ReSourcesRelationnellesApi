@@ -97,7 +97,9 @@ Body : aucun
 Header :
 * limit : nombre maximal de ressources à retour (par défaut à 100)
 * page : numéro de page à retourner (par défaut à 1)
-Ewemple : Pour limit = 10 et page = 3, on obtiendra les ressources 20 à 30
+* search (optionnelle) : renseigner les critères de recherches
+
+Exemple : Pour limit = 10 et page = 3, on obtiendra les ressources 20 à 30
 
 Exemple de retour :
 ```json
