@@ -40,9 +40,11 @@ module.exports = {
             });
             sql += ` ORDER BY r.date_creation DESC 
             LIMIT ` + firstRecord + `, ` + limit + `;`
+            console.log(sql);
             config.connexion.query(
                 sql,
                 (error, result) => {
+                    console.log(error, result)
                     log(req, error)
                     return res.status(200).json(result)
                 }
