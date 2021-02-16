@@ -1,6 +1,9 @@
 {
   "name": "resourcesrelationnellesapi",
   "version": "1.0.0",
+  "engines": {
+    "node": "14.x"
+  },
   "description": "Web services du projet ReSources Relationnelles",
   "main": "index.js",
   "scripts": {
