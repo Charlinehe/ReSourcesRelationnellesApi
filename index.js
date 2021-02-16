@@ -8,7 +8,7 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: true}))
 app.use(bodyParser.json())
 
-app.listen(config.port, () => {
+app.listen(process.env.PORT || config.port, () => {
     console.log('Server running on port ' + config.port)
 })
 
