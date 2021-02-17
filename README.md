@@ -27,7 +27,6 @@ node index.js
 Les webservices communiquent grâce au format de langage JSON
 
 ### Log in
-
 URL
 ```
 {server_name}/api/user/login
@@ -55,7 +54,6 @@ Exemple de retour :
 ```
 
 ### Détail d'une ressource
-
 URL 
 ```
 {server_name}/api/resource/{resource_id}
@@ -87,13 +85,13 @@ Exemple de retour :
 ```
 
 ### Liste de ressources
-Les ressources retournées sont ordonnées de la plus récente à la plus ancienne
+Les ressources retournées sont ordonnées de la plus récente à la plus ancienne  
 URL
 ```
 {server_name}/api/resource/public
 ```
 Méthode : GET  
-Body : aucun
+Body : aucun  
 Header :
 * limit : nombre maximal de ressources à retour (par défaut à 100)
 * page : numéro de page à retourner (par défaut à 1)
@@ -145,6 +143,23 @@ Exemple de retour :
         "relationship_type": "Professionnel - collaborateurs",
         "resource_type": "Vidéo",
         "category": "Loisirs"
+    }
+]
+```
+
+### Evaluation d'une ressource
+URL
+```
+{server_name}/api/resource/valuation/{resource_id}
+```
+Méthode : GET  
+Body : aucun  
+Header : aucun  
+Exemple de retour :
+```json
+[
+    {
+        "valuation": 3.4
     }
 ]
 ```
