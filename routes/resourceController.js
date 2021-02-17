@@ -129,4 +129,23 @@ module.exports = {
         })
     },
 
+    getResourceValuation: (req, res) => {
+        config.connexion.connect((errorCon) => {
+            sql = `select ROUND(sum(valuation)/count(*), 1) as valuation
+                from comment 
+                where resource_id = ` + req.params.resource_id + ` 
+                group by resource_id`
+            config.connexion.query(sql,
+            (error, result) => {
+                log(req, error)
+                if (error) throw error;
+                if (result[0] != undefined) {
+                    return res.status(200).json(result)
+                } else {
+                    return res.status(500).json({"message": "Ouech, ça marche pas !"})
+                }
+            })
+        })
+    }
+
 }
