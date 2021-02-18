@@ -9,12 +9,9 @@ git clone https://github.com/Charlinehe/ReSourcesRelationnellesApi
 ```
 
 ## Installer les dépendances
-Exécuter les commandes suivantes : 
+Exécuter la commande suivante : 
 ``` 
-npm install express  
-npm install mysql
-npm install jsonwebtoken --save
-npm install body-parser --save
+npm install
 ```
 
 ## Lancer le projet
