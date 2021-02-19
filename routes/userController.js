@@ -72,5 +72,15 @@ module.exports = {
 
             })
         })
+    },
+
+    inscription: (req, res) => {
+        let username = req.body.username
+        let firstname = req.body.firstname
+        let lastname = req.body.lastname
+        let email = req.body.email
+        let password = req.body.password
+        let departmentId = req.body.departmentId
+        let ageCategoryId = req.body.ageCategoryId
     }
 }

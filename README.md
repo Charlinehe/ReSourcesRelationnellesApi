@@ -151,12 +151,41 @@ URL
 ```
 Méthode : GET  
 Body : aucun  
-Header : aucun  
+Header : /  
 Exemple de retour :
 ```json
 [
     {
         "valuation": 3.4
     }
+]
+```
+### Liste des départements
+URL
+```
+{server_name}/api/resource/departments
+```
+Méthode : GET  
+Body : aucun  
+Header : /  
+Exemple de retour :
+```json
+[
+    {
+        "id": 1,
+        "label": "Ain",
+        "number": "01"
+    },
+    {
+        "id": 2,
+        "label": "Aisne",
+        "number": "02"
+    },
+    {
+        "id": 3,
+        "label": "Allier",
+        "number": "03"
+    },
+    { ... }
 ]
 ```
