@@ -13,6 +13,7 @@ exports.router = (() => {
     router.route('/user/login').post(userController.login)
 
     router.route('/departments').get(labelTableController.getDepartments)
+    router.route('/age_categories').get(labelTableController.getAgeCategories)
 
     return router
 })()

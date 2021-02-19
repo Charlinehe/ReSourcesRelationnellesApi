@@ -16,5 +16,20 @@ module.exports = {
                     return res.status(200).json(result)
                 })
         })
+    },
+
+    getAgeCategories: (req, res) => {
+        config.connexion.connect((error) => {
+            log(req, error)
+
+            sql = `SELECT id, label 
+            FROM age_category`
+
+            config.connexion.query(sql, 
+                (error, result) => {
+                    log(req, error)
+                    return res.status(200).json(result)
+                })
+        })
     }
 }

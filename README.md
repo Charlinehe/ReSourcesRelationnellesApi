@@ -189,3 +189,33 @@ Exemple de retour :
     { ... }
 ]
 ```
+
+### Liste des catégories d'âge
+URL
+```
+{server_name}/api/resource/age_categories
+```
+Méthode : GET  
+Body : aucun  
+Header : /  
+Exemple de retour :
+```json
+[
+    {
+        "id": 1,
+        "label": "Enfant (0 à 18 ans)"
+    },
+    {
+        "id": 2,
+        "label": "Jeune adulte (19 à 35 ans)"
+    },
+    {
+        "id": 3,
+        "label": "Adulte (36 à 55 ans)"
+    },
+    {
+        "id": 4,
+        "label": "Senior (à partir de 56 ans)"
+    }
+]
+```
