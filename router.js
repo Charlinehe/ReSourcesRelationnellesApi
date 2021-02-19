@@ -12,6 +12,7 @@ exports.router = (() => {
     router.route('/resource/valuation/:resource_id').get(resourceController.getResourceValuation)
 
     router.route('/comment/:resource_id').get(commentController.getResourceComments)
+    router.route('/comment/answer/:comment_id').get(commentController.getCommentAnswer)
 
     router.route('/user/login').post(userController.login)
     router.route('/user/inscription').post(userController.inscription)

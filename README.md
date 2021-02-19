@@ -189,6 +189,7 @@ Exemple de retour :
 ```
 
 ### Liste des commentaires d'une ressource
+Les commentaires sont ordonnées par date de publication (du plus récent au plus ancien)
 URL
 ```
 {server_name}/api/comment/{resource_id}
@@ -204,6 +205,33 @@ Exemple de retour :
         "content": "Cum facere repellendus quo et. Ex ut commodi accusamus.",
         "comment_date": "2020-03-22T11:26:47.000Z",
         "username": "maillot.sebastien"
+    }
+]
+```
+
+### Liste des réponses à un commentaire
+Les réponses sont ordonnées par date de publication (de la plus récente à la plus ancienne)  
+URL
+```
+{server_name}/api/comment/answer/{comment_id}
+```
+Méthode : GET  
+Body : aucun  
+Header : /  
+Exemple de retour :
+```json
+[
+    {
+        "id": 1,
+        "content": "Est illum soluta non quia.",
+        "answer_date": "2019-12-17T12:21:51.000Z",
+        "username": "veronique99"
+    },
+    {
+        "id": 45,
+        "content": "Rerum qui iste quia quis quo maxime ut.",
+        "answer_date": "2019-10-13T21:13:08.000Z",
+        "username": "thibaut.hamel"
     }
 ]
 ```
