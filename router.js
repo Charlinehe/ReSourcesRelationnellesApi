@@ -2,6 +2,7 @@ const express = require('express')
 const resourceController = require('./routes/resourceController')
 const userController = require('./routes/userController')
 const labelTableController = require('./routes/labelTableController')
+const commentController = require('./routes/commentController')
 
 exports.router = (() => {
     const router = express.Router()
@@ -9,6 +10,8 @@ exports.router = (() => {
     router.route('/resource/public').get(resourceController.getPublicResources)
     router.route('/resource/:resource_id').get(resourceController.getDetailResource)
     router.route('/resource/valuation/:resource_id').get(resourceController.getResourceValuation)
+
+    router.route('/comment/:resource_id').get(commentController.getResourceComments)
 
     router.route('/user/login').post(userController.login)
     router.route('/user/inscription').post(userController.inscription)

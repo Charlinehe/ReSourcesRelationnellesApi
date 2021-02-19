@@ -187,6 +187,27 @@ Exemple de retour :
     }
 ]
 ```
+
+### Liste des commentaires d'une ressource
+URL
+```
+{server_name}/api/comment/{resource_id}
+```
+Méthode : GET  
+Body : aucun  
+Header : /  
+Exemple de retour :
+```json
+[
+    {
+        "id": 1,
+        "content": "Cum facere repellendus quo et. Ex ut commodi accusamus.",
+        "comment_date": "2020-03-22T11:26:47.000Z",
+        "username": "maillot.sebastien"
+    }
+]
+```
+
 ### Liste des départements
 URL
 ```
