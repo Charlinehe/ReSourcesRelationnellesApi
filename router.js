@@ -11,6 +11,7 @@ exports.router = (() => {
     router.route('/resource/valuation/:resource_id').get(resourceController.getResourceValuation)
 
     router.route('/user/login').post(userController.login)
+    router.route('/user/inscription').post(userController.inscription)
 
     router.route('/departments').get(labelTableController.getDepartments)
     router.route('/age_categories').get(labelTableController.getAgeCategories)

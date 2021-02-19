@@ -50,6 +50,33 @@ Exemple de retour :
 }
 ```
 
+### Inscription
+URL
+```
+{server_name}/api/user/inscription
+```
+Méthode : POST  
+Body :
+```json
+{
+    "username": "__username__",
+    "firstname": "__firstname__",
+    "lastname": "__lastname__",
+    "email": "__email__",
+    "password": "__password__",
+    "departmentId": 1,
+    "ageCategoryId": 1,
+    "roleId": 1
+}
+```
+Header : \  
+Exemple de retour :
+```json
+{
+    "userId": 214
+}
+```
+
 ### Détail d'une ressource
 URL 
 ```
