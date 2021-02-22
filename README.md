@@ -188,6 +188,28 @@ Exemple de retour :
 ]
 ```
 
+### Action sur une ressource
+URL
+```
+{server_name}/api/resource/action/{resource_id}
+```
+Méthode : POST  
+Body : aucun  
+Header : 
+* actionTypeId : Type d'action sur la ressource 
+  * 1 : Création
+  * 2 : Consultation
+  * 3 : Validation
+  * 4 : Suspension
+  * 5 : Modification
+  * 6 : Suppression
+Exemple de retour :
+```json
+{
+    "id": 827
+}
+```
+
 ### Liste des commentaires d'une ressource
 Les commentaires sont ordonnées par date de publication (du plus récent au plus ancien)
 URL

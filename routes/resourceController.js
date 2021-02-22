@@ -145,6 +145,36 @@ module.exports = {
                 }
             })
         })
+    }, 
+
+    insertActionResource: (req, res) => {
+        const actionTypeId = req.headers['actiontypeid']
+        const token = req.headers.authorization
+        let decodedToken = jwtUtils.checkToken(token)
+        let date = new Date()
+
+        if (decodedToken.error === undefined) {
+            config.connexion.connect((errorCon) => {
+                const action = {
+                    'user_id': decodedToken.userId,
+                    'resource_id': req.params.resource_id,
+                    'action_type_id': actionTypeId,
+                    'action_date': date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getUTCMinutes() + ":" + date.getUTCSeconds()
+                }
+                config.connexion.query('INSERT INTO rel_user_action_resource SET?', action,
+                    (error, result) => {
+                        log(req, error)
+                        if (error) {
+                            return res.status(500).json({"erreur": error})
+                        } else {
+                            return res.status(200).json({"id": result.insertId})
+                        }
+                    })
+            })
+        } else {
+            return res.status(403).json(decodedToken)
+        }
+        
     }
 
 }

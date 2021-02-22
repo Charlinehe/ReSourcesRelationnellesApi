@@ -10,6 +10,7 @@ exports.router = (() => {
     router.route('/resource/public').get(resourceController.getPublicResources)
     router.route('/resource/:resource_id').get(resourceController.getDetailResource)
     router.route('/resource/valuation/:resource_id').get(resourceController.getResourceValuation)
+    router.route('/resource/action/:resource_id').post(resourceController.insertActionResource)
 
     router.route('/comment/:resource_id').get(commentController.getResourceComments)
     router.route('/comment/answer/:comment_id').get(commentController.getCommentAnswer)
