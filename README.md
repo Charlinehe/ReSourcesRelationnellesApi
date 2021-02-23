@@ -280,6 +280,27 @@ Exemple de retour :
 }
 ```
 
+### Répondre à un commentaire
+URL
+```
+{server_name}/api/resource/comment/{comment_id}/answer
+```
+Méthode : POST  
+Body :
+```json
+{
+    "content": "__contenu_du_commentaire__"
+}
+```
+Header : 
+* Authorisation : renseigner le token  
+Exemple de retour :
+```json
+{
+    "id": 301
+}
+```
+
 ### Liste des départements
 URL
 ```
