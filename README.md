@@ -196,6 +196,7 @@ URL
 Méthode : POST  
 Body : aucun  
 Header : 
+* Authorisation : renseigner le token
 * actionTypeId : Type d'action sur la ressource 
   * 1 : Création
   * 2 : Consultation
@@ -256,6 +257,27 @@ Exemple de retour :
         "username": "thibaut.hamel"
     }
 ]
+```
+
+### Poster un commentaire
+URL
+```
+{server_name}/api/resource/{resource_id}/comment
+```
+Méthode : POST  
+Body :
+```json
+{
+    "content": "__contenu_du_commentaire__"
+}
+```
+Header : 
+* Authorisation : renseigner le token  
+Exemple de retour :
+```json
+{
+    "id": 2002
+}
 ```
 
 ### Liste des départements
