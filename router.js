@@ -19,6 +19,7 @@ exports.router = (() => {
 
     router.route('/user/login').post(userController.login)
     router.route('/user/inscription').post(userController.inscription)
+    router.route('/user/information').get(userController.getUserInformation)
 
     router.route('/departments').get(labelTableController.getDepartments)
     router.route('/age_categories').get(labelTableController.getAgeCategories)

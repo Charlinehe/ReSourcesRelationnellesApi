@@ -155,5 +155,33 @@ module.exports = {
             })
 
         }
+    },
+
+    getUserInformation: (req, res) => {
+        const token = req.headers.authorization
+        decodedToken = jwtUtils.checkToken(token)
+
+        if (decodedToken.error === undefined) {
+            config.connexion.connect((error) => {
+                log(req, error)
+    
+                sql = `SELECT firstname, lastname, email, ac.label as age_category
+                    FROM user u 
+                    INNER JOIN age_category ac ON u.age_category_id = ac.ID
+                    WHERE u.id = ` + decodedToken.userId
+                
+                config.connexion.query(sql,
+                    (error, result) => {
+                        if (error) {
+                            return res.status(500).json({"erreur": "erreur lors de l'exécution de la requête"})
+                        } else {
+                            return res.status(200).json(result)
+                        }
+                    })
+            })
+        } else {
+            return res.status(403).json(decodedToken)
+        }
+
     }
 }

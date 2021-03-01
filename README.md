@@ -77,6 +77,29 @@ Exemple de retour :
 }
 ```
 
+### Informations personnelles d'un utilisateur
+ URL
+```
+{server_name}/api/user/information
+```
+Méthode : GET  
+Body : \  
+Header : 
+* Authorisation : renseigner le token
+
+Exemple de retour :
+```json
+[
+    {
+        "firstname": "Jeanne",
+        "lastname": "Faitlecafe",
+        "email": "jeanne@cafe.fr",
+        "age_category": "Adulte (36 à 55 ans)"
+    }
+]
+```
+
+
 ### Détail d'une ressource
 URL 
 ```
